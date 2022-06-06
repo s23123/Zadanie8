@@ -36,16 +36,37 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDoctors(int id)
         {
-            return Ok();
+            try
+            {
+                await _dbService.DeleteDoctor(id);
+                return Ok($"Pomyslnie usunieto doktora o id {id}");
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut("doctor/{id}")]
-        public async Task<IActionResult> UpdateDoctors(SomeSortOfDoctors someSortOfDoctors)
+        public async Task<IActionResult> UpdateDoctors(SomeSortOfDoctors someSortOfDoctors, int id)
         {
             try
             {
-                await _dbService.UpdateDoctor(someSortOfDoctors);
+                await _dbService.UpdateDoctor(someSortOfDoctors, id);
                 return Ok("Pomyslnie zmodyfikowano");
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+        [HttpGet("perscription/{id}")]
+        public async Task<IActionResult> GetPrescription(int id)
+        {
+            try
+            {
+                var perscription = await _dbService.GetPerscription(id);
+                return Ok(perscription);
             }catch(Exception e)
             {
                 return BadRequest(e.Message);

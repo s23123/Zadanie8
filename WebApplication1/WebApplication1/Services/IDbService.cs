@@ -9,6 +9,8 @@ namespace WebApplication1.Services
     {
         Task<IEnumerable<SomeSortOfDoctors>> GetDoctors();
         Task AddDoctor(SomeSortOfDoctors someSortOfDoctors);
-        Task UpdateDoctor(SomeSortOfDoctors someSortOfDoctors);
+        Task UpdateDoctor(SomeSortOfDoctors someSortOfDoctors, int id);
+        Task<IEnumerable<SomeSortOfPerscripion>> GetPerscription(int id);
+        Task DeleteDoctor(int id);
     }
 }
